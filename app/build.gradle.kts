@@ -1,9 +1,36 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    `maven-publish`
 }
 
+group = "com.basic.logcat"
+version = "0.0.1"
 
+
+//// 创建一个task来发布源码
+//tasks.register<Jar>("sourcesJar") {
+//    archiveClassifier.set("sources")
+//    val sources = android.sourceSets.map { set -> set.java.getSourceFiles() }
+//    from(sources)
+//}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                // Applies the component for the release build variant.\
+                // from(components["release"])
+                // You can then customize attributes of the publication as shown below.
+                groupId = (group.toString())
+                artifactId = "logcat"
+                version = version
+            }
+        }
+    }
+}
 
 
 android {
