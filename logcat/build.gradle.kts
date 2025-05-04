@@ -10,14 +10,6 @@ group = "com.basic.logcat"
 version = "0.0.1"
 
 
-//// 创建一个task来发布源码
-//tasks.register<Jar>("sourcesJar") {
-//    archiveClassifier.set("sources")
-//    val sources = android.sourceSets.map { set -> set.java.getSourceFiles() }
-//    from(sources)
-//}
-
-
 afterEvaluate {
     publishing {
         publications {
@@ -72,4 +64,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+//    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    
 }

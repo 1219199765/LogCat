@@ -49,4 +49,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.google.code.gson:gson:2.10.1")
+    //net
+    implementation("com.squareup.okhttp3:okhttp:4.11.0") // 要求OkHttp4以上
+    implementation("com.github.liangjingkanji:Net:3.7.0")
+
+    //moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
 }
