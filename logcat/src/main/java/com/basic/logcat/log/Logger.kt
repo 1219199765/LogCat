@@ -1,4 +1,4 @@
-package com.basic.logcat
+package com.basic.logcat.log
 
 import android.util.Log
 import org.json.JSONArray

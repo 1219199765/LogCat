@@ -53,6 +53,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    // 开启 ViewBinding 的
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 
@@ -64,7 +68,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    
+
+    //使用网络拦截日志需要倒入拦截器库
     compileOnly("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
 }

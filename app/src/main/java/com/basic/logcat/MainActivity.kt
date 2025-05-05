@@ -1,13 +1,17 @@
 package com.basic.logcat
 
-import android.annotation.SuppressLint
-import android.os.Bundle
+import android.graphics.BitmapFactory
+import android.util.Log
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.basic.logcat.base.EarthActivity
+import com.basic.logcat.base.EarthViewModel
+import com.basic.logcat.databinding.ActivityMainBinding
+import com.basic.logcat.log.LogCat
+import com.basic.logcat.log.LogCatHttpLoggingInterceptor
+import com.basic.logcat.utils.getNavigationBarHeight
+import com.basic.logcat.utils.isNetworkConnected
+import com.basic.logcat.utils.saveToPhoto
 import com.drake.net.Get
 import com.drake.net.NetConfig
 import com.drake.net.okhttp.setConverter
@@ -15,23 +19,12 @@ import com.drake.net.okhttp.setDebug
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
-class MainActivity : AppCompatActivity() {
-    lateinit var btn1:Button
 
-    @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        btn1 = findViewById(R.id.btn_1)
-
-
+class MainActivity : EarthActivity<ActivityMainBinding,EarthViewModel>(
+    ActivityMainBinding::inflate,
+    EarthViewModel::class
+) {
+    override fun initActivity() {
         NetConfig.initialize("https://www.wanandroid.com",this) {
             connectTimeout(300, TimeUnit.SECONDS)
             readTimeout(300, TimeUnit.SECONDS)
@@ -43,14 +36,22 @@ class MainActivity : AppCompatActivity() {
                 setLevel(LogCatHttpLoggingInterceptor.Level.BODY)
             })
         }
+    }
 
-        btn1.setOnClickListener {
-//            Logger.d(jsons)
-//            Logger.d("-------------")
-//            Logger.json(jsons)
+    override fun initData() {
+        binding.btn1.setOnClickListener {
             request()
         }
+
+        binding.btn2.setOnClickListener {
+        }
+
+        binding.btn3.setOnClickListener {
+        }
     }
+
+
+
 
 
     private fun request(){
